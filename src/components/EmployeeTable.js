@@ -1,0 +1,38 @@
+import React from "react";
+
+function EmployeeTable(params) {
+    const {list} = params;
+    return (
+        <table class="blueTable">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Activity</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <td colspan="4">
+              <div class="links"><a href="#">&laquo;</a> <a class="active" href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">&raquo;</a></div>
+            </td>
+          </tr>
+        </tfoot>
+        <tbody>
+        {
+                    list?.map((data) => (
+          <tr>
+            <td>{data.id}</td>
+            <td>{data.username}</td>
+            <td>{data.role}</td>
+            <td>{data.enabled}</td>
+          </tr>
+           ))
+        }
+        </tbody>
+    
+      </table>
+    )
+}
+export default EmployeeTable;
