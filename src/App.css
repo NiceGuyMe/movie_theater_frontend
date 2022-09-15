@@ -1,6 +1,4 @@
-  body{
-    text-decoration: none;
-  }
+
   table.blueTable {
     border: 0px solid #333333;
     background-color: #EEEEEE;
@@ -19,14 +17,10 @@
     background: #D0E4F5;
   }
   table.blueTable thead {
-    background: #04AA6D;
-    background: -moz-linear-gradient(top, #43bf91 0%, #1db27b 66%, #04AA6D 100%);
-    background: -webkit-linear-gradient(top, #43bf91 0%, #1db27b 66%, #04AA6D 100%);
-    background: linear-gradient(to bottom, #43bf91 0%, #1db27b 66%, #04AA6D 100%);
+    background: #0069d9;
     border-bottom: 2px solid #444444;
   }
   table.blueTable thead th {
-    font-size: 15px;
     font-weight: bold;
     color: #FFFFFF;
     border-left: 2px solid #D0E4F5;
@@ -53,7 +47,7 @@
   }
   table.blueTable tfoot .links a{
     display: inline-block;
-    background: #04AA6D;
+    background: #0069d9;
     color: #FFFFFF;
     padding: 2px 8px;
     border-radius: 5px;
@@ -76,13 +70,14 @@
 
 /* Change the color of links on hover */
 .topnav a:hover {
+    text-decoration:none;
   background-color: #ddd;
   color: black;
 }
 
 /* Add a color to the active/current link */
 .topnav a.active {
-  background-color: #04AA6D;
+  background-color: #0069d9;
   color: white;
 }
 

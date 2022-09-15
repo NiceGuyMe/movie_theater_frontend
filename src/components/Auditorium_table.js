@@ -7,15 +7,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function AudTable(params) {
   const { list } = params;
 
-  const [id, setID] = useState(null);
   const [name, setName] = useState("");
   const [seatsNo, setseatsNo] = useState("");
 
-  useEffect(() => {
-    setID(localStorage.getItem("ID"));
-    setName(localStorage.getItem("Name"));
-    setseatsNo(localStorage.getItem("seatsNo"));
-  }, []);
 
   const getData = () => {
     axios.get(`http://localhost:3000/auditoriums/`).then((getData) => {
@@ -27,16 +21,24 @@ function AudTable(params) {
       getData();
     });
   };
-  const updateAPIData = () => {
-    axios.put(`https://60fbca4591156a0017b4c8a7.mockapi.io/fakeData/${id}`, {
+  const updateAPIData = (id) => {
+    axios.put(`http://localhost:8080/auditoriums/${id}`, {
       name,
       seatsNo,
     });
   };
+  const postData = () => {
+    axios.put(`http://localhost:8080/auditoriums/`, {
+      name,
+      seatsNo,
+    })
+    console.log(name);
+    console.log(seatsNo);
+  }
 
   return (
     <>
-      <MODAL />
+      <ADDMODAL />
       <table class="blueTable">
         <thead>
           <tr>
@@ -55,9 +57,7 @@ function AudTable(params) {
                 <button onClick={() => onDelete(data.id)}>Delete</button>
               </td>
               <td>
-                <button type="submit" onClick={updateAPIData}>
-                  Update
-                </button>
+                <UPDATEMODAL id={data.id}/>
               </td>
             </tr>
           ))}
@@ -65,54 +65,111 @@ function AudTable(params) {
       </table>
     </>
   );
+
+  function ADDMODAL() {
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    return (
+      <>
+        <Button variant="primary" onClick={handleShow}>
+          ADD Auditorium
+        </Button>
+
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>ADD Auditorium</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  onChange={(e) => setName(e.target.value)}
+                  type="text"
+                  placeholder="A"
+                  autoFocus
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>Place Number</Form.Label>
+                <Form.Control
+                onChange={(e) => setseatsNo(e.target.value)}
+                  type=""
+                  placeholder="15"
+                  autoFocus
+                />
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={postData}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
+  }
+
+
+
+  function UPDATEMODAL(ID) {
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    return (
+      <>
+        <Button variant="primary" onClick={handleShow}>
+          UPDATE
+        </Button>
+
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>ADD Auditorium</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  onChange={(e) => setName(e.target.value)}
+                  type="text"
+                  placeholder="A"
+                  autoFocus
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>Place Number</Form.Label>
+                <Form.Control
+                  onChange={(e) => setseatsNo(e.target.value)}
+                  type=""
+                  placeholder="15"
+                  autoFocus
+                />
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={updateAPIData(ID)}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
+  }
+
+
+
 }
 
-function MODAL() {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  return (
-    <>
-      <Button variant="primary" onClick={handleShow}>
-        ADD Auditorium
-      </Button>
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="A"
-                autoFocus
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Place Number</Form.Label>
-              <Form.Control
-                type=""
-                placeholder="15"
-                autoFocus
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
-  );
-}
 
 export default AudTable;
