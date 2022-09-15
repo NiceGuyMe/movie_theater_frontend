@@ -49,8 +49,8 @@ function SeatTable(params) {
                     <td>{data.id}</td>
                     <td>{data.row}</td>
                     <td>{data.number}</td>
-                    <td>{data.auditoriumId}</td>
-                    <td><button onClick={() => onDelete(data.id)}>Delete</button></td>
+                    <td>{data.auditorium.name}</td>
+                    <td><Button variant="primary" onClick={() => onDelete(data.id)}>Delete</Button></td>
                     <td><button type='submit' onClick={updateAPIData}>Update</button></td>
                 </tr>
                   ))

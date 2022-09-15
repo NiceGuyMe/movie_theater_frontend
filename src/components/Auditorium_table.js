@@ -11,15 +11,8 @@ function AudTable(params) {
   const [seatsNo, setseatsNo] = useState("");
 
 
-  const getData = () => {
-    axios.get(`http://localhost:3000/auditoriums/`).then((getData) => {
-      list(getData.data);
-    });
-  };
   const onDelete = (id) => {
-    axios.delete(`http://localhost:8080/auditoriums/${id}`).then(() => {
-      getData();
-    });
+    axios.delete(`http://localhost:8080/auditoriums/${id}`)
   };
   const updateAPIData = (id) => {
     axios.put(`http://localhost:8080/auditoriums/${id}`, {
@@ -54,10 +47,10 @@ function AudTable(params) {
               <td>{data.name}</td>
               <td>{data.seatsNo}</td>
               <td>
-                <button onClick={() => onDelete(data.id)}>Delete</button>
+                <Button variant="primary" onClick={() => onDelete(data.id)}>Delete</Button>
               </td>
               <td>
-                <UPDATEMODAL id={data.id}/>
+                <UPDATEMODAL ID={data.id}/>
               </td>
             </tr>
           ))}
@@ -86,7 +79,7 @@ function AudTable(params) {
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Name</Form.Label>
                 <Form.Control
-                  onChange={(e) => setName(e.target.value)}
+                  onSubmit={(e) => setName(e.target.value)}
                   type="text"
                   placeholder="A"
                   autoFocus
@@ -116,12 +109,28 @@ function AudTable(params) {
     );
   }
 
-
-
   function UPDATEMODAL(ID) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [Naame,setNaame]= useState('');
+    const [No, setNo] = useState("");
+
+
+    const onChangeNaame = (e) => {
+      if(e.target === "Naame") {
+          setNaame(e.target.value);
+          console.log(Naame);
+      }
+    }
+    const onChangeNo = (e) => {
+      if(e.target === "No") {
+          setNo(e.target.value);
+          console.log(No);
+      }
+    }
+    console.log(No,Naame);
+
     return (
       <>
         <Button variant="primary" onClick={handleShow}>
@@ -135,10 +144,11 @@ function AudTable(params) {
           <Modal.Body>
             <Form>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>Name</Form.Label>
+                <Form.Label>{Naame}</Form.Label>
                 <Form.Control
-                  onChange={(e) => setName(e.target.value)}
-                  type="text"
+                  //onChange={(e) => setName(e.target.value)}
+
+                  onChange={(e)=>{onChangeNaame(e)}}
                   placeholder="A"
                   autoFocus
                 />
@@ -146,8 +156,9 @@ function AudTable(params) {
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Place Number</Form.Label>
                 <Form.Control
-                  onChange={(e) => setseatsNo(e.target.value)}
-                  type=""
+                  //onChange={(e) => setseatsNo(e.target.value)}
+
+                  onChange={(e)=>{onChangeNo(e)}}
                   placeholder="15"
                   autoFocus
                 />

@@ -42,8 +42,8 @@ function ReservationTypeTable(params) {
                     list?.map((data) => (
           <tr>
             <td>{data.id}</td>
-            <td>{data.reservationType}</td>
-            <td><button onClick={() => onDelete(data.id)}>Delete</button></td>
+            <td>{data.reservation_type}</td>
+            <td> <Button variant="primary" onClick={() => onDelete(data.id)}>Delete</Button></td>
             <td><button type='submit' onClick={updateAPIData}>Update</button></td>
           </tr>
            ))

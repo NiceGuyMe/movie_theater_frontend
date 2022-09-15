@@ -66,7 +66,7 @@ function MovieTable(params) {
             <td>{data.casting}</td>
             <td>{data.description}</td>
             <td>{data.durationMin} min </td>
-            <td><button onClick={() => onDelete(data.id)}>Delete</button></td>
+            <td> <Button variant="primary" onClick={() => onDelete(data.id)}>Delete</Button></td>
             <td><button type='submit' onClick={updateAPIData}>Update</button></td>
           </tr>
            ))

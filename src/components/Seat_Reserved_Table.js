@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from "react";
+import React,{ useState} from "react";
 import axios from 'axios';
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -6,8 +6,6 @@ import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
 function Seat_Reserved_Table(params) {
     const {list} = params;
-
-    const [id, setID] = useState(null);
     const [name, setname] = useState('');
     const [seatsNo, setseatsNo] = useState('');
     const getData = () => {
@@ -22,7 +20,7 @@ function Seat_Reserved_Table(params) {
             getData();
         })
     }
-    const updateAPIData = () => {
+    const updateAPIData = (id) => {
         axios.put(`https://60fbca4591156a0017b4c8a7.mockapi.io/fakeData/${id}`, {
             name,
             seatsNo,
@@ -35,9 +33,10 @@ function Seat_Reserved_Table(params) {
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Seat</th>
-                    <th>Reservation</th>
-                     <th>Screening</th>
+                    <th>Seat Row</th>
+                    <th>Seat number</th>
+                     <th>Auditorium</th>
+                     <th>Movie</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,10 +44,11 @@ function Seat_Reserved_Table(params) {
                     list?.map((data) => (
                 <tr>
                     <td>{data.id}</td>
-                    <td>{data.seatId}</td>
-                    <td>{data.reservationId}</td>
-                    <td>{data.screeningId}</td>
-                    <td><button onClick={() => onDelete(data.id)}>Delete</button></td>
+                    <td>{data.seat_id.row}</td>
+                    <td>{data.seat_id.number}</td>
+                    <td>{data.seat_id.auditorium.name}</td>
+                    <td>{data.reservation_id.screening_id.movie.title}</td>
+                    <td> <Button variant="primary" onClick={() => onDelete(data.id)}>Delete</Button></td>
                     <td><button type='submit' onClick={updateAPIData}>Update</button></td>
                 </tr>
                   ))

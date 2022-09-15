@@ -34,11 +34,11 @@ function ReservationTable(params) {
         <thead>
           <tr>
             <th>Id</th>
-            <th>Screening</th>
-            <th>Employee Reservation</th>
+            <th>Movie</th>
+            <th>Auditorium</th>
+            <th>Employee reservation</th>
             <th>Reservation Type</th>
-            <th>Contact</th>
-            <th>Reserved</th>
+            <th>Reservation Contact</th>
             <th>Employee Paid</th>
             <th>Paid</th>
             <th>Active</th>
@@ -49,15 +49,15 @@ function ReservationTable(params) {
                     list?.map((data) => (
           <tr>
             <td>{data.id}</td>
-            <td>{data.screeningId}</td>
-            <td>{data.employeeReservedId}</td>
-            <td>{data.reservationTypeId}</td>
-            <td>{data.reservationTypeId}</td>
-            <td>{data.reserved} </td>
-            <td>{data.employeePaidId} </td>
+            <td>{data.screening_id.movie.title}</td>
+            <td>{data.screening_id.auditorium.name}</td>
+            <td>{data.employee_reserved_id.username}</td>
+            <td>{data.reservation_type_id.reservation_type}</td>
+            <td>{data.reservation_contact} </td>
+            <td>{data.employee_paid_paid_id.username} </td>
             <td>{data.paid} </td>
             <td>{data.active} </td>
-            <td><button onClick={() => onDelete(data.id)}>Delete</button></td>
+            <td> <Button variant="primary" onClick={() => onDelete(data.id)}>Delete</Button></td>
             <td><button type='submit' onClick={updateAPIData}>Update</button></td>
           </tr>
            ))

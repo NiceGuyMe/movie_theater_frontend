@@ -51,7 +51,7 @@ function EmployeeTable(params) {
                 <td>{data.username}</td>
                 <td>{data.role}</td>
                 <td>{data.enabled}</td>
-                <td><button onClick={() => onDelete(data.id)}>Delete</button></td>
+                <td> <Button variant="primary" onClick={() => onDelete(data.id)}>Delete</Button></td>
                 <td><button type='submit' onClick={updateAPIData}>Update</button></td>
               </tr>
             ))

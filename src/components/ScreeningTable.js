@@ -37,7 +37,8 @@ function ScreeningTable(params) {
                 <tr>
                     <th>ID</th>
                     <th>Movie</th>
-                    <th>Auditorium</th>
+                    <th>Duration</th>
+                     <th>Auditorium</th>
                      <th>Start</th>
                 </tr>
             </thead>
@@ -46,10 +47,11 @@ function ScreeningTable(params) {
                     list?.map((data) => (
                 <tr>
                     <td>{data.id}</td>
-                    <td>{data.movieId}</td>
-                    <td>{data.auditoriumId}</td>
+                    <td>{data.movie.title}</td>
+                    <td>{data.movie.durationMin}</td>
+                    <td>{data.auditorium.name}</td>
                     <td>{data.screeningStart}</td>
-                    <td><button onClick={() => onDelete(data.id)}>Delete</button></td>
+                    <td> <Button variant="primary" onClick={() => onDelete(data.id)}>Delete</Button></td>
                     <td><button type='submit' onClick={updateAPIData}>Update</button></td>
                 </tr>
                   ))
