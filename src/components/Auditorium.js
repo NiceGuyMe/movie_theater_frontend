@@ -1,68 +1,67 @@
-import React, {useState} from "react";
+import React, { useState } from 'react';
 import '../App.css'
 import axios from 'axios';
+import AudTable from './Auditorium_table';
 import { useEffect } from 'react'
-import { FOOT } from "./Reservation_type";
-import AudTable from "./Auditorium_table";
+import { FOOT } from './Reservation_type';
 
-  function HEAD(params) {
-    return (
-      <>
-        <div class="topnav">
-          <a class="active" href="./auditorum">
-            Auditorium
-          </a>
-          <a href="./employee">Employee</a>
-          <a href="./movie">Movie</a>
-          <a href="./reservation_type">Reservation_type</a>
-          <a href="./reservation">Reservation</a>
-        </div>
-      </>
-    );
-  }
+function HEAD(params) {
+  return (
+    <>
+      <div class="topnav">
+        <a class="active" href="./auditorium">
+          Auditorium
+        </a>
+        <a href="./employee">Employee</a>
+        <a href="./movie">Movie</a>
+        <a href="./reservation_type">Reservation_type</a>
+        <a href="./reservation">Reservation</a>
+        <a href="./screening">Screening</a>
+        <a href="./seat">seat</a>
+        <a href="./seat_reserved">seat reserved</a>
+      </div>
+    </>
+  );
+}
 
-  function BODY(params) {
-    const [list,setList] = useState([]);
-    useEffect(() =>{
-        const promise = axios.get("http://localhost:8080/auditoriums/");
-        promise.then( (response) => {
-            setList(response.data);
-            console.log(response.data);
-        }).catch((error) => {
-            console.error(error);
-        })
 
-    },[]);
 
-    return (
-      <>
-        <section className="u-align-center u-clearfix u-section-1" id="sec-d01b">
+function BODY(params) {
+  const [list, setList] = useState([]);
+  useEffect(() => {
+    const promise = axios.get("http://localhost:8080/auditoriums/");
+    promise.then((response) => {
+      setList(response.data);
+      console.log(response.data);
+    }).catch((error) => {
+      console.error(error);
+    })
 
-          <div className="u-clearfix u-sheet u-sheet-1">
-            <a href="https://nicepage.com/wordpress-website-builder"
-              className="u-border-2 u-border-black u-btn u-button-style u-hover-black u-none u-text-hover-white u-btn-1">ADD<br></br>
-            </a>
-            <a href="https://nicepage.com/wordpress-website-builder"
-              className="u-border-2 u-border-black u-btn u-button-style u-hover-black u-none u-text-hover-white u-btn-2">MODIFY<br></br>
-            </a>
-            <div className="u-expanded-width u-table u-table-responsive u-table-1">
-             
-            <AudTable list={list}/>
-            </div>
+  }, []);
+  return (
+    <>
+      <section>
+        <div>
+          <div>
+          <button>ADD</button>
+            <AudTable list={list} />
+            
           </div>
-        </section>
-      </>
-    );
-  }
+        </div>
+      </section>
+    </>
+  )
+
+}
 
 function Auditorium(params) {
-    return (
-      <>
-        <HEAD />
-        <BODY />
-        <FOOT />
-      </>
-    );
-  }
-  export default Auditorium;
+  return (
+    <>
+      <HEAD />
+      <BODY />
+      <FOOT />
+    </>
+  )
+}
 
+export default Auditorium;

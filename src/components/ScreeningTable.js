@@ -1,26 +1,20 @@
-
-import axios from 'axios';import React,{ useState, useEffect } from "react";
-function AudTable(params) {
+import React,{ useState, useEffect } from "react";
+import axios from 'axios';
+function ScreeningTable(params) {
     const {list} = params;
 
     const [id, setID] = useState(null);
-    const [name, setName] = useState('');
+    const [name, setname] = useState('');
     const [seatsNo, setseatsNo] = useState('');
-
-    useEffect(() => {
-        setID(localStorage.getItem('ID'))
-        setName(localStorage.getItem('Name'));
-        setseatsNo(localStorage.getItem('seatsNo'));
-    }, []);
-
+    
     const getData = () => {
-        axios.get(`http://localhost:3000/auditoriums/`)
+        axios.get(`http://localhost:8080/screenings/`)
             .then((getData) => {
                 list(getData.data);
             })
     }
     const onDelete = (id) => {
-        axios.delete(`http://localhost:8080/auditoriums/${id}`)
+        axios.delete(`http://localhost:8080/screenings/${id}`)
         .then(() => {
             getData();
         })
@@ -31,14 +25,14 @@ function AudTable(params) {
             seatsNo,
         })
     }
-    
     return (
         <table class="blueTable">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Auditorium name</th>
-                    <th>Place number</th>
+                    <th>Movie</th>
+                    <th>Auditorium</th>
+                     <th>Start</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,8 +40,9 @@ function AudTable(params) {
                     list?.map((data) => (
                 <tr>
                     <td>{data.id}</td>
-                    <td>{data.name}</td>
-                    <td>{data.seatsNo}</td>
+                    <td>{data.movieId}</td>
+                    <td>{data.auditoriumId}</td>
+                    <td>{data.screeningStart}</td>
                     <td><button onClick={() => onDelete(data.id)}>Delete</button></td>
                     <td><button type='submit' onClick={updateAPIData}>Update</button></td>
                 </tr>
@@ -57,5 +52,4 @@ function AudTable(params) {
         </table>
     )
 }
-
-export default AudTable;
+export default ScreeningTable;

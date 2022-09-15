@@ -1,7 +1,37 @@
-import React from "react";
-
+import React,{ useState, useEffect } from "react";
+import axios from 'axios';
 function MovieTable(params) {
     const {list} = params;
+
+    const [id, setID] = useState(null);
+    const [title, setusername] = useState('');
+    const [director, setrole] = useState('');
+    const [casting, setcasting] = useState('');
+    const [description, setdescription] = useState('');
+
+    const [durationMin, setdurationMin] = useState('');
+
+    const getData = () => {
+      axios.get(`http://localhost:8080/movies/`)
+          .then((getData) => {
+              list(getData.data);
+          })
+  }
+  const onDelete = (id) => {
+      axios.delete(`http://localhost:8080/movies/${id}`)
+      .then(() => {
+          getData();
+      })
+  }
+  const updateAPIData = () => {
+    axios.put(`ttp://localhost:8080/movies/${id}`, {
+      title,
+      director,
+      casting,
+      description,
+      durationMin
+    })
+}
     return (
         <table class="blueTable">
         <thead>
@@ -30,7 +60,9 @@ function MovieTable(params) {
             <td>{data.director}</td>
             <td>{data.casting}</td>
             <td>{data.description}</td>
-            <td>{data.duration} min </td>
+            <td>{data.durationMin} min </td>
+            <td><button onClick={() => onDelete(data.id)}>Delete</button></td>
+            <td><button type='submit' onClick={updateAPIData}>Update</button></td>
           </tr>
            ))
         }
