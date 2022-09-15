@@ -4,7 +4,6 @@ import axios from 'axios';
 import AudTable from './Auditorium_table';
 import { useEffect } from 'react'
 import { FOOT } from './Reservation_type';
-
 function HEAD(params) {
   return (
     <>
@@ -43,7 +42,6 @@ function BODY(params) {
       <section>
         <div>
           <div>
-          <button>ADD</button>
             <AudTable list={list} />
             
           </div>
@@ -63,5 +61,10 @@ function Auditorium(params) {
     </>
   )
 }
+
+
+
+
+
 
 export default Auditorium;

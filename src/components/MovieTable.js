@@ -1,5 +1,9 @@
 import React,{ useState, useEffect } from "react";
 import axios from 'axios';
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
+import "bootstrap/dist/css/bootstrap.min.css";
 function MovieTable(params) {
     const {list} = params;
 
@@ -8,7 +12,6 @@ function MovieTable(params) {
     const [director, setrole] = useState('');
     const [casting, setcasting] = useState('');
     const [description, setdescription] = useState('');
-
     const [durationMin, setdurationMin] = useState('');
 
     const getData = () => {
@@ -33,6 +36,8 @@ function MovieTable(params) {
     })
 }
     return (
+      <>
+      <MODAL />
         <table class="blueTable">
         <thead>
           <tr>
@@ -69,6 +74,79 @@ function MovieTable(params) {
         </tbody>
     
       </table>
+      </>
     )
 }
+
+
+function MODAL() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  return (
+    <>
+      <Button variant="primary" onClick={handleShow}>
+        ADD MOVIE
+      </Button>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Title</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="titanic"
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Director</Form.Label>
+              <Form.Control
+                type=""
+                placeholder="Kevin Feige"
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Casting</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="RDJ"
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Synopsis</Form.Label>
+              <Form.Control
+                type=""
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Duration</Form.Label>
+              <Form.Control
+                type=""
+                placeholder="150"
+                autoFocus
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+}
+
 export default MovieTable;
